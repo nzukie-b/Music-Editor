@@ -83,7 +83,7 @@ public class SheetPanel extends JPanel {
     int noteWidth = 40;
     int widthBuffer = noteWidth * 2;
     int heightBuffer = noteHeight * 2;
-    this.panelWidth = Math.min(lastBeat, 40) * noteWidth + widthBuffer + 2;
+    this.panelWidth = Math.max(lastBeat, 40) * noteWidth + widthBuffer + 2;
     this.panelHeight = pitches * noteHeight + heightBuffer + 2;
     NoteName[] a = data.getSheetData().keySet()
         .toArray(new NoteName[data.getSheetData().keySet().size()]);
