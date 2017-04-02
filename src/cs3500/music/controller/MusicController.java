@@ -35,8 +35,13 @@ public class MusicController {
         model.measureLength(),
         model.maxNote(),
         model.getTempo()));
-    configureKeyBoardListener();
-    configureMouseListener();
+    try {
+      configureKeyBoardListener();
+      configureMouseListener();
+    }
+    catch (IllegalArgumentException e) {
+      //
+    }
   }
 
 
