@@ -30,6 +30,9 @@ public class ViewFactory {
     if (str.equals("midi")) {
       return new MidiViewImpl();
     }
+    if (str.equals("combo")) {
+      return new CombinationView(new MidiViewImpl(), new GuiViewFrame());
+    }
     else {
       throw new IllegalArgumentException("Not a valid music type. ");
     }

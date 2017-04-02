@@ -29,7 +29,8 @@ public class SheetPanel extends JPanel {
     this.data = data;
     this.redLineBeat = 0;
     this.panelWidth = 1000;
-    this.panelHeight = 1000;
+    this.panelHeight = 500;
+    this.setPreferredSize(new Dimension(panelWidth, panelHeight));
     this.setFocusable(true);
   }
 

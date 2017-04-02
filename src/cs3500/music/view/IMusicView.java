@@ -1,6 +1,7 @@
 package cs3500.music.view;
 
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 
 /**
  * The represents all of the operations for the music view.
@@ -28,10 +29,16 @@ public interface IMusicView {
    */
   void setKeyListener(KeyListener kl);
 
+  void setMouseListener(MouseListener ml);
+
   /**
    * Get the specific beat shown in the view.
    *
    * @return get the beat the view is currently highlighting.
    */
   int getBeat();
+
+  void toggleMusic();
+
+
 }

@@ -83,7 +83,7 @@ public interface MusicModelOps {
    * @param a An array of sheetnames.
    * @return The beat of the maximum note.
    */
-  int maxNote(NoteName[] a);
+  int maxNote();
 
 
   /**

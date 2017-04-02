@@ -131,7 +131,7 @@ public class MusicModel implements MusicModelOps {
   public void consecSheetsHelp(MusicModel m) {
     NoteName[] a = m.sheet.keySet().toArray(new NoteName[m.sheet.keySet().size()]);
     NoteName[] arr = sheet.keySet().toArray(new NoteName[sheet.keySet().size()]);
-    int max = m.maxNote(a);
+    int max = m.maxNote();
     for (NoteName nn : arr) {
       Set<Note> val = sheet.get(nn);
       for (Note n : val) {
@@ -151,7 +151,7 @@ public class MusicModel implements MusicModelOps {
     else {
       StringBuilder s = new StringBuilder();
       NoteName[] a = sheet.keySet().toArray(new NoteName[sheet.keySet().size()]);
-      int maxNote = maxNote(a);
+      int maxNote = maxNote();
       int pad = String.valueOf(maxNote).length();
       if (maxNote == 10) {
         pad = pad - 1;
@@ -201,7 +201,8 @@ public class MusicModel implements MusicModelOps {
 
   @Override
   //maxNote() method added so the controller can pass data to the view
-  public int maxNote(NoteName[] a) {
+  public int maxNote() {
+      NoteName[] a = sheet.keySet().toArray(new NoteName[sheet.keySet().size()]);
     int maxNote = 0;
     for (NoteName nn : a) {
       Set<Note> v = sheet.get(nn);

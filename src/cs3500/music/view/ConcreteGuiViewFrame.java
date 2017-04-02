@@ -3,6 +3,7 @@ package cs3500.music.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 /**
@@ -55,7 +56,17 @@ public class ConcreteGuiViewFrame extends JFrame implements IMusicView {
   }
 
   @Override
+  public void setMouseListener(MouseListener ml) {
+    //not relevant
+  }
+
+  @Override
   public int getBeat() {
     return 0;
+  }
+
+  @Override
+  public void toggleMusic() {
+
   }
 }

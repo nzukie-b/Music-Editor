@@ -2,8 +2,11 @@ package cs3500.music.view;
 
 
 import java.awt.*;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.KeyListener;
 
+import java.awt.event.MouseListener;
 import java.util.TreeMap;
 
 import javax.swing.*;
@@ -17,6 +20,8 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
 
   private final SheetPanel shtPanel;
   private final PianoPanel pianoPanel;
+  private boolean paused;
+  private JScrollPane scrollPane;
 
   /**
    * Creates new GuiView.
@@ -25,6 +30,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
     super();
     this.setTitle("MusicEditor");
     this.setPreferredSize(new Dimension(1000, 1000));
+    this.paused = false;
 
     ModelData data = new ModelData("", new TreeMap<>(), 4, 0, 60);
     this.shtPanel = new SheetPanel(data);
@@ -33,16 +39,14 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
     shtPanel.setBackground(Color.WHITE);
     pianoPanel.setBackground(Color.GRAY);
 
-    JScrollPane scrollPane = new JScrollPane(shtPanel,
+    this.scrollPane = new JScrollPane(shtPanel,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.getContentPane().add(scrollPane);
 
-
     this.add(scrollPane, BorderLayout.NORTH);
-    //this.getContentPane().add(scrollPane);
     this.add(pianoPanel, BorderLayout.CENTER);
 
     this.setSize(getPreferredSize());
@@ -54,7 +58,6 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
 
   @Override
   public Dimension getPreferredSize() {
-    //return new Dimension((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(), 1000);
     return new Dimension(Math.max(500, shtPanel.getWidth()), 500 + shtPanel.getHeight());
   }
 
@@ -62,10 +65,12 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
   public void updateView(ModelData modelData) {
     shtPanel.updateSheet(modelData);
     pianoPanel.updateSheet(modelData);
+    scrollPane.getHorizontalScrollBar().setValue(shtPanel.getBeat() * 40 - 160);
   }
 
   @Override
   public void setBeat(int beat) {
+    scrollPane.getHorizontalScrollBar().setValue(shtPanel.getBeat() * 40 - 160);
     shtPanel.updateBeat(beat);
     pianoPanel.updateBeat(beat);
   }
@@ -78,7 +83,17 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
   }
 
   @Override
+  public void setMouseListener(MouseListener ml) {
+    pianoPanel.addMouseListener(ml);
+  }
+
+  @Override
   public int getBeat() {
     return shtPanel.getBeat();
+  }
+
+  @Override
+  public void toggleMusic() {
+    paused = !paused;
   }
 }
