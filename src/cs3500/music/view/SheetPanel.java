@@ -56,8 +56,8 @@ public class SheetPanel extends JPanel {
     }
     if ((beat >= 0) && (beat <= lastBeat)) {
       this.redLineBeat = beat;
-      repaint();
     }
+    repaint();
   }
 
   /**

@@ -56,8 +56,7 @@ public class MusicViewTest {
     return new ModelData(model.printSheet(),
         model.getSheet(),
         model.measureLength(),
-        model.maxNote(model.getSheet().keySet()
-            .toArray(new NoteName[model.getSheet().keySet().size()])),
+        model.maxNote(),
         model.getTempo());
   }
 

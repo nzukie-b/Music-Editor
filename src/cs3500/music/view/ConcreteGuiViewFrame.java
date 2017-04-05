@@ -52,12 +52,12 @@ public class ConcreteGuiViewFrame extends JFrame implements IMusicView {
 
   @Override
   public void setKeyListener(KeyListener kl) {
-    //not relevant for this view
+    throw new IllegalArgumentException();
   }
 
   @Override
   public void setMouseListener(MouseListener ml) {
-    //not relevant
+    throw new IllegalArgumentException();
   }
 
   @Override

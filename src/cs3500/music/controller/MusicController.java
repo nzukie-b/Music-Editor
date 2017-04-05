@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
+import sun.plugin2.jvm.CircularByteBuffer.Streamer;
 
 /**
  * Class to represent the controller.
@@ -57,20 +58,15 @@ public class MusicController {
 
     keyPress.put(KeyEvent.VK_P, () -> view.toggleMusic());
 
-    keyPress.put(KeyEvent.VK_HOME, () -> view.setBeat(0));
+    keyPress.put(KeyEvent.VK_HOME, new changeBeat(0));
 
-    keyPress.put(KeyEvent.VK_END, () -> view.setBeat(model.maxNote()));
+    keyPress.put(KeyEvent.VK_END, new changeBeat(model.maxNote()));
 
     KeyboardListener kl = new KeyboardListener();
 
     kl.setKeyPressedMap(keyPress);
 
     view.setKeyListener(kl);
-    view.updateView(new ModelData(model.printSheet(),
-        model.getSheet(),
-        model.measureLength(),
-        model.maxNote(),
-        model.getTempo()));
   }
 
   private void configureMouseListener() {
@@ -81,6 +77,23 @@ public class MusicController {
 
     ml.setMouseMap(mouseClick);
     view.setMouseListener(ml);
+  }
+
+  private class changeBeat implements Runnable {
+    private int beat;
+    changeBeat(int beat) {
+      this.beat = beat;
+    }
+
+    public void run() {
+      view.setBeat(beat);
+      view.updateView(new ModelData(model.printSheet(),
+          model.getSheet(),
+          model.measureLength(),
+          model.maxNote(),
+          model.getTempo()));
+    }
+
   }
 
   private class MouseBoardListener implements MouseListener {
