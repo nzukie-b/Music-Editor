@@ -70,10 +70,13 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
     shtPanel.updateBeat(beat);
     pianoPanel.updateBeat(beat);
     if (shtPanel.getBeat() % 40 == 0) {
-      if (prevBeat < beat)
+      if (prevBeat < beat) {
         scrollPane.getHorizontalScrollBar().setValue(shtPanel.getBeat() * 40);
-      else
+        System.out.println(shtPanel.getBeat() * 40 + " " + scrollPane.getHorizontalScrollBar().getValue());
+      }
+      else {
         scrollPane.getHorizontalScrollBar().setValue((shtPanel.getBeat() - 1) * 40 - 1600);
+      }
     }
   }
 
