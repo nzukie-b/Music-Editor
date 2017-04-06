@@ -69,4 +69,9 @@ public class ConcreteGuiViewFrame extends JFrame implements IMusicView {
   public void toggleMusic() {
 
   }
+
+  @Override
+  public void scrollWithMusic() {
+
+  }
 }

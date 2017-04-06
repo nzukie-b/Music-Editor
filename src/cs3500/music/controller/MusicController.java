@@ -7,12 +7,14 @@ import cs3500.music.view.ClickToNN;
 import cs3500.music.view.IMusicView;
 import cs3500.music.view.KeyboardListener;
 import cs3500.music.view.ModelData;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
-import sun.plugin2.jvm.CircularByteBuffer.Streamer;
+import javax.swing.Timer;
 
 /**
  * Class to represent the controller.
@@ -20,6 +22,7 @@ import sun.plugin2.jvm.CircularByteBuffer.Streamer;
 public class MusicController {
   private IMusicView view;
   private MusicModelOps model;
+  private Timer timer;
 
   /**
    * The constructor for the MusicController.
@@ -30,6 +33,8 @@ public class MusicController {
   public MusicController(MusicModelOps model, IMusicView view) {
     this.model = model;
     this.view = view;
+    this.timer = new Timer(model.getTempo() / 1000, new keepTime());
+    timer.start();
 
     view.updateView(new ModelData(model.printSheet(),
         model.getSheet(),
@@ -94,6 +99,13 @@ public class MusicController {
           model.getTempo()));
     }
 
+  }
+
+  private class keepTime implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      view.scrollWithMusic();
+    }
   }
 
   private class MouseBoardListener implements MouseListener {

@@ -38,6 +38,8 @@ public interface IMusicView {
    */
   int getBeat();
 
+  void scrollWithMusic();
+
   void toggleMusic();
 
 

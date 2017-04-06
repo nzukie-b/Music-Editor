@@ -26,16 +26,17 @@ public class PianoPanel extends JPanel {
     this.currBeat = 0;
     this.data = data;
     this.setBackground(Color.white);
-    this.setPreferredSize(new Dimension(500, 500));
+    this.setPreferredSize(new Dimension(1800, 300));
   }
 
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
 
+    int offset = 200;
     Graphics2D gPen = (Graphics2D) g;
     gPen.setColor(Color.BLACK);
-    gPen.fillRect(30, 1, 1400, 300);
+    gPen.fillRect(offset, 1, 1400, 300);
     Set<NoteName> notes = data.getNotesAtBeat(currBeat);
     NoteNameComp nnComp = new NoteNameComp();
 
@@ -50,7 +51,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(30 + 140 * j, 1, 19, 300);
+          gPen.fillRect(offset + 140 * j, 1, 19, 300);
         } else if (i == 2) { // for pitch D
           gPen.setColor(Color.WHITE);
           for (NoteName n : notes) {
@@ -58,7 +59,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(50 + 140 * j, 1, 19, 300);
+          gPen.fillRect(offset + 20 + 140 * j, 1, 19, 300);
         } else if (i == 4) { //for pitch E
           gPen.setColor(Color.WHITE);
           for (NoteName n : notes) {
@@ -66,7 +67,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(70 + 140 * j, 1, 19, 300);
+          gPen.fillRect(offset + 40 + 140 * j, 1, 19, 300);
         } else if (i == 5) { //for pitch F
           gPen.setColor(Color.WHITE);
           for (NoteName n : notes) {
@@ -74,7 +75,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(90 + 140 * j, 1, 19, 300);
+          gPen.fillRect(offset + 60 + 140 * j, 1, 19, 300);
         } else if (i == 7) { //for pitch G
           gPen.setColor(Color.WHITE);
           for (NoteName n : notes) {
@@ -82,7 +83,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(110 + 140 * j, 1, 19, 300);
+          gPen.fillRect(offset + 80 + 140 * j, 1, 19, 300);
         } else if (i == 9) { // for pitch A
           gPen.setColor(Color.WHITE);
           for (NoteName n : notes) {
@@ -90,7 +91,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(130 + 140 * j, 1, 19, 300);
+          gPen.fillRect(offset + 100 + 140 * j, 1, 19, 300);
         } else if (i == 11) { // for pitch B
           gPen.setColor(Color.WHITE);
           for (NoteName n : notes) {
@@ -98,7 +99,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(150 + 140 * j, 1, 19, 300);
+          gPen.fillRect(offset + 120 + 140 * j, 1, 19, 300);
         }
       }
     }
@@ -112,7 +113,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(42 + 140 * j, 1, 10, 180);
+          gPen.fillRect(offset + 12 + 140 * j, 1, 10, 180);
         }
 
         else if (i == 3) { //for pitch DS
@@ -122,7 +123,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(62 + 140 * j, 1, 10, 180);
+          gPen.fillRect(200 + 32 + 140 * j, 1, 10, 180);
         }
         else if (i == 6) { //for pitch FS
           gPen.setColor(Color.BLACK);
@@ -131,7 +132,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(102 + 140 * j, 1, 10, 180);
+          gPen.fillRect(offset + 72 + 140 * j, 1, 10, 180);
         }
         else if (i == 8) { //for pitch GS
           gPen.setColor(Color.BLACK);
@@ -140,7 +141,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(122 + 140 * j, 1, 10, 180);
+          gPen.fillRect(offset + 92 + 140 * j, 1, 10, 180);
         }
         else if (i == 10) { //for pitch AS
           gPen.setColor(Color.BLACK);
@@ -149,7 +150,7 @@ public class PianoPanel extends JPanel {
               gPen.setColor(Color.yellow);
             }
           }
-          gPen.fillRect(142 + 140 * j, 1, 10, 180);
+          gPen.fillRect(offset + 112 + 140 * j, 1, 10, 180);
         }
       }
     }

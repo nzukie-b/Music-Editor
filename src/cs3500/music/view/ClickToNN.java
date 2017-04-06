@@ -16,9 +16,9 @@ public class ClickToNN {
     int x = me.getX();
     int y = me.getY();
 
-    int pitch = ((x - 30) / 20) % 7;
-    int p2 = (x - 30) % 140;
-    int oct = (x - 30) / 140;
+    int pitch = ((x - 200) / 20) % 7;
+    int p2 = (x - 200) % 140;
+    int oct = (x - 200) / 140;
     Pitch p;
 
 

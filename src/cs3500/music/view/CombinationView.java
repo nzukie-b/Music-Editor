@@ -7,28 +7,33 @@ import java.awt.event.MouseListener;
  * Class that shows the gui while playing midi.
  */
 public class CombinationView implements IMusicView {
-  MidiViewImpl midi;
-  GuiViewFrame gui;
-  int currBeat;
+  private MidiViewImpl midi;
+  private GuiViewFrame gui;
+  private int currBeat;
+  private boolean paused;
 
   CombinationView(MidiViewImpl midi, GuiViewFrame gui) {
     this.midi = midi;
     this.gui = gui;
     this.currBeat = 0;
-    syncBeats();
+    this.paused = false;
   }
 
   @Override
   public void updateView(ModelData data) {
     gui.updateView(data);
-    midi.updateView(data);
-    syncBeats();
+    if (!paused) {
+      midi.updateView(data);
+    }
   }
 
   @Override
   public void setBeat(int beat) {
-    midi.setBeat(beat);
-    syncBeats();
+    currBeat = beat;
+    if (paused) {
+      gui.setBeat(beat);
+      midi.setBeat(gui.getBeat());
+    }
   }
 
   @Override
@@ -48,13 +53,16 @@ public class CombinationView implements IMusicView {
 
   @Override
   public void toggleMusic() {
+    paused = !paused;
     gui.toggleMusic();
     midi.toggleMusic();
-    syncBeats();
   }
 
-  private void syncBeats() {
-    currBeat = midi.getBeat();
-    gui.setBeat(currBeat);
+  @Override
+  public void scrollWithMusic() {
+    if (!paused) {
+      gui.setBeat(gui.getBeat() + 1);
+      currBeat++;
+    }
   }
 }

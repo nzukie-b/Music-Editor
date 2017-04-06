@@ -119,4 +119,9 @@ public class MidiViewImpl implements IMusicView {
     }
   }
 
+  @Override
+  public void scrollWithMusic() {
+
+  }
+
 }

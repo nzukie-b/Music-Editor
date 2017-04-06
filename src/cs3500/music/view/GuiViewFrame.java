@@ -29,7 +29,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
   public GuiViewFrame() {
     super();
     this.setTitle("MusicEditor");
-    this.setPreferredSize(new Dimension(1000, 1000));
+    this.setPreferredSize(new Dimension(1802, 800));
     this.paused = false;
 
     ModelData data = new ModelData("", new TreeMap<>(), 4, 0, 60);
@@ -49,32 +49,31 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
     this.add(scrollPane, BorderLayout.NORTH);
     this.add(pianoPanel, BorderLayout.CENTER);
 
-    this.setSize(getPreferredSize());
-
     this.setVisible(true);
     this.setFocusable(true);
+    this.setResizable(false);
     this.pack();
-  }
-
-  @Override
-  public Dimension getPreferredSize() {
-    return new Dimension(Math.max(500, shtPanel.getWidth()), 500 + shtPanel.getHeight());
   }
 
   @Override
   public void updateView(ModelData modelData) {
     shtPanel.updateSheet(modelData);
     pianoPanel.updateSheet(modelData);
-    scrollPane.getHorizontalScrollBar().setMaximum(modelData.getMaxBeat() * 40 + 80);
-    scrollPane.getHorizontalScrollBar().setValue(shtPanel.getBeat() * 40 - 160);
+    scrollPane.getHorizontalScrollBar().setMaximum(modelData.getMaxBeat() * 40 + 82);
+    if (shtPanel.getBeat() == modelData.getMaxBeat())
+      scrollPane.getHorizontalScrollBar().setValue(shtPanel.getBeat() * 40);
   }
 
   @Override
   public void setBeat(int beat) {
+    int prevBeat = shtPanel.getBeat();
     shtPanel.updateBeat(beat);
     pianoPanel.updateBeat(beat);
     if (shtPanel.getBeat() % 40 == 0) {
-      scrollPane.getHorizontalScrollBar().setValue(shtPanel.getBeat() * 40);
+      if (prevBeat < beat)
+        scrollPane.getHorizontalScrollBar().setValue(shtPanel.getBeat() * 40);
+      else
+        scrollPane.getHorizontalScrollBar().setValue((shtPanel.getBeat() - 1) * 40 - 1600);
     }
   }
 
@@ -98,5 +97,10 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
   @Override
   public void toggleMusic() {
     paused = !paused;
+  }
+
+  @Override
+  public void scrollWithMusic() {
+
   }
 }
