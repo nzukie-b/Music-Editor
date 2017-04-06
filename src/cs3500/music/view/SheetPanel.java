@@ -40,6 +40,9 @@ public class SheetPanel extends JPanel {
    * @param data the new data to be drawn.
    */
   public void updateSheet(ModelData data) {
+    this.setPreferredSize(new Dimension(data.getMaxBeat() * 40, 500));
+    this.revalidate();
+
     this.data = data;
     repaint();
   }

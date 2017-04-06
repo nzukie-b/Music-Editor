@@ -29,7 +29,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
   public GuiViewFrame() {
     super();
     this.setTitle("MusicEditor");
-    this.setPreferredSize(new Dimension(1802, 800));
+    this.setSize(new Dimension(1802, 800));
     this.paused = false;
 
     ModelData data = new ModelData("", new TreeMap<>(), 4, 0, 60);
@@ -42,17 +42,19 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
     this.scrollPane = new JScrollPane(shtPanel,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    System.out.println(scrollPane.getHorizontalScrollBar().getBlockIncrement());
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.getContentPane().add(scrollPane);
 
+    this.setLayout(new BorderLayout());
     this.add(scrollPane, BorderLayout.NORTH);
     this.add(pianoPanel, BorderLayout.CENTER);
 
     this.setVisible(true);
     this.setFocusable(true);
     this.setResizable(false);
-    this.pack();
+    //this.pack();
   }
 
   @Override
@@ -71,13 +73,14 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
     pianoPanel.updateBeat(beat);
     if (shtPanel.getBeat() % 40 == 0) {
       if (prevBeat < beat) {
-        scrollPane.getHorizontalScrollBar().setValue(shtPanel.getBeat() * 40);
-        System.out.println(shtPanel.getBeat() * 40 + " " + scrollPane.getHorizontalScrollBar().getValue());
+        scrollPane.getHorizontalScrollBar().setValue(scrollPane.getHorizontalScrollBar()
+            .getValue() + 1600);
       }
       else {
         scrollPane.getHorizontalScrollBar().setValue((shtPanel.getBeat() - 1) * 40 - 1600);
       }
     }
+    repaint();
   }
 
   @Override
