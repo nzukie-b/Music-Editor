@@ -12,7 +12,13 @@ public class CombinationView implements IMusicView {
   private int currBeat;
   private boolean paused;
 
-  CombinationView(MidiViewImpl midi, GuiViewFrame gui) {
+  /**
+   * Constructor for the Combination view.
+   *
+   * @param midi the midi view to be used.
+   * @param gui the gui view to be used.
+   */
+  public CombinationView(MidiViewImpl midi, GuiViewFrame gui) {
     this.midi = midi;
     this.gui = gui;
     this.currBeat = 0;
@@ -29,8 +35,8 @@ public class CombinationView implements IMusicView {
 
   @Override
   public void setBeat(int beat) {
-    currBeat = beat;
     if (paused) {
+      currBeat = beat;
       gui.setBeat(beat);
       midi.setBeat(gui.getBeat());
     }

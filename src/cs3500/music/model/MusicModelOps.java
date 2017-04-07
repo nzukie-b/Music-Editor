@@ -80,7 +80,6 @@ public interface MusicModelOps {
   /**
    * Finds the maximum beat of a note in a sheet.
    *
-   * @param a An array of sheetnames.
    * @return The beat of the maximum note.
    */
   int maxNote();

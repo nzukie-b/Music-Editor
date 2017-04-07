@@ -3,9 +3,7 @@ package cs3500.music.controller;
 import cs3500.music.model.MusicModelOps;
 import cs3500.music.model.Note;
 import cs3500.music.model.NoteName;
-import cs3500.music.view.ClickToNN;
 import cs3500.music.view.IMusicView;
-import cs3500.music.view.KeyboardListener;
 import cs3500.music.view.ModelData;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +20,6 @@ import javax.swing.Timer;
 public class MusicController {
   private IMusicView view;
   private MusicModelOps model;
-  private Timer timer;
 
   /**
    * The constructor for the MusicController.
@@ -33,7 +30,8 @@ public class MusicController {
   public MusicController(MusicModelOps model, IMusicView view) {
     this.model = model;
     this.view = view;
-    this.timer = new Timer(model.getTempo() / 1000, new keepTime());
+
+    Timer timer = new Timer(model.getTempo() / 1000, new KeepTime());
     timer.start();
 
     view.updateView(new ModelData(model.printSheet(),
@@ -63,17 +61,25 @@ public class MusicController {
 
     keyPress.put(KeyEvent.VK_P, () -> view.toggleMusic());
 
-    keyPress.put(KeyEvent.VK_HOME, new changeBeat(0));
+    keyPress.put(KeyEvent.VK_HOME, new ChangeBeat(0));
 
-    keyPress.put(KeyEvent.VK_END, new changeBeat(model.maxNote()));
+    keyPress.put(KeyEvent.VK_END, new ChangeBeat(model.maxNote()));
 
     KeyboardListener kl = new KeyboardListener();
 
     kl.setKeyPressedMap(keyPress);
 
-    view.setKeyListener(kl);
+    try {
+      view.setKeyListener(kl);
+    }
+    catch (IllegalArgumentException e) {
+      //
+    }
   }
 
+  /**
+   * Configues the mouse listener to properly convert a mouse click to a note name.
+   */
   private void configureMouseListener() {
     Map<Integer, ClickToNN> mouseClick = new HashMap<>();
     mouseClick.put(MouseEvent.BUTTON1, new ClickToNN());
@@ -81,33 +87,69 @@ public class MusicController {
     MouseBoardListener ml = new MouseBoardListener();
 
     ml.setMouseMap(mouseClick);
-    view.setMouseListener(ml);
+    try {
+      view.setMouseListener(ml);
+    }
+    catch (IllegalArgumentException e) {
+      //
+    }
   }
 
-  private class changeBeat implements Runnable {
+  /**
+   * Private class that updates the beat when Home or End are pressed. Updates the
+   * view once the beat has been changed.
+   */
+  private class ChangeBeat implements Runnable {
     private int beat;
-    changeBeat(int beat) {
+
+    /**
+     * Constructor for a ChangeBeat.
+     * @param beat the beat that the view is being updated to reflect.
+     */
+    ChangeBeat(int beat) {
       this.beat = beat;
     }
 
+    /**
+     * Sets the view's beat to the beat that was given and updates the view.
+     */
     public void run() {
-      view.setBeat(beat);
-      view.updateView(new ModelData(model.printSheet(),
-          model.getSheet(),
-          model.measureLength(),
-          model.maxNote(),
-          model.getTempo()));
+      try {
+        view.setBeat(beat);
+        view.updateView(new ModelData(model.printSheet(),
+            model.getSheet(),
+            model.measureLength(),
+            model.maxNote(),
+            model.getTempo()));
+      }
+      catch (IllegalArgumentException e) {
+        //
+      }
     }
 
   }
 
-  private class keepTime implements ActionListener {
+  /**
+   * Private class to keep the gui view in sync with the midi view in a combination view.
+   */
+  private class KeepTime implements ActionListener {
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
-      view.scrollWithMusic();
+      try {
+        view.scrollWithMusic();
+      }
+      catch (Exception exc) {
+        exc.printStackTrace();
+      }
     }
   }
 
+  /**
+   * Private class to map the mouse event to the ClickToNN class, where the click is
+   * converted into a NoteName.
+   */
   private class MouseBoardListener implements MouseListener {
     private Map<Integer, ClickToNN> mouseMap;
 
@@ -115,8 +157,13 @@ public class MusicController {
      * The constructor for the KeyboardListener.
      */
     public MouseBoardListener() {
+      //Doesn't need anything
     }
 
+    /**
+     * Sets the map to be equal to the given one.
+     * @param mouseMap the map to be used.
+     */
     public void setMouseMap(Map<Integer, ClickToNN> mouseMap) {
       this.mouseMap = mouseMap;
     }
@@ -144,22 +191,22 @@ public class MusicController {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+      //doesn't do anything
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+      //doesn't do anything
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+      //doesn't do anything
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+      //doesn't do anything
     }
   }
 }

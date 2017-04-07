@@ -16,6 +16,8 @@ public class ViewFactory {
    * Creates a view based on string that is typed. Can create a visual view - the
    * GUI with the "staff" and the piano, a console view - the notes rendered as
    * text, and midi - plays the notes so you can hear the music.
+   * Combination view added in assignment 7 so that when "combo" is passed in a
+   * combination view is created.
    *
    * @param str the type of view to be created.
    * @return a different kind of view.

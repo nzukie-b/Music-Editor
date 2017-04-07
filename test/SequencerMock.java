@@ -19,7 +19,7 @@ public class SequencerMock implements Sequencer {
   private StringBuilder log;
 
   public SequencerMock() {
-
+    //not relevant
   }
 
   @Override

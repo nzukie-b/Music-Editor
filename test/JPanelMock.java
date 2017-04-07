@@ -9,7 +9,7 @@ public class JPanelMock extends ConcreteGuiViewPanel {
   private StringBuilder log = new StringBuilder();
 
   /**
-   * Constructor for the mock
+   * Constructor for the mock.
    */
   public JPanelMock() {
     super();

@@ -200,9 +200,10 @@ public class MusicModel implements MusicModelOps {
   }
 
   @Override
-  //maxNote() method added so the controller can pass data to the view
+  //maxNote() method added so the controller can pass data to the view, changed in
+  //assignment 7 to not take in an array of NoteNames.
   public int maxNote() {
-      NoteName[] a = sheet.keySet().toArray(new NoteName[sheet.keySet().size()]);
+    NoteName[] a = sheet.keySet().toArray(new NoteName[sheet.keySet().size()]);
     int maxNote = 0;
     for (NoteName nn : a) {
       Set<Note> v = sheet.get(nn);

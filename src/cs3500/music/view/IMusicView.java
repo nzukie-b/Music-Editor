@@ -27,9 +27,9 @@ public interface IMusicView {
    *
    * @param kl the KeyListener being added.
    */
-  void setKeyListener(KeyListener kl);
+  void setKeyListener(KeyListener kl) throws IllegalArgumentException;
 
-  void setMouseListener(MouseListener ml);
+  void setMouseListener(MouseListener ml) throws IllegalArgumentException;
 
   /**
    * Get the specific beat shown in the view.
@@ -38,8 +38,16 @@ public interface IMusicView {
    */
   int getBeat();
 
+  /**
+   * Scrolls the gui view to be in time with the Midi View in a combination view.
+   * Added in Assignment 7.
+   */
   void scrollWithMusic();
 
+  /**
+   * Toggles the music so that it will go between being paused and playing when a p
+   * is pressed.
+   */
   void toggleMusic();
 
 

@@ -47,10 +47,6 @@ public class MidiViewImpl implements IMusicView {
     }
   }
 
-  public MidiViewImpl(Sequencer sequencer) {
-    this.seq = sequencer;
-  }
-
   @Override
   public void updateView(ModelData data) {
     this.data = data;
@@ -121,7 +117,7 @@ public class MidiViewImpl implements IMusicView {
 
   @Override
   public void scrollWithMusic() {
-
+    //throw new IllegalArgumentException();
   }
 
 }

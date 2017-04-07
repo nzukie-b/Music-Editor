@@ -1,4 +1,4 @@
-package cs3500.music.view;
+package cs3500.music.controller;
 
 import cs3500.music.model.NoteName;
 import cs3500.music.model.Pitch;
@@ -9,9 +9,20 @@ import java.awt.event.MouseEvent;
  */
 public class ClickToNN {
 
+  /**
+   * Constructor, doesn't have anyting to initialize.
+   */
   public ClickToNN() {
+    //
   }
 
+  /**
+   * Converts a mouse event to a the corresponding pitch and octave that were pressed
+   * on the piano.
+   *
+   * @param me Mouse Event
+   * @return the NoteName that was clicked on.
+   */
   public NoteName getNN(MouseEvent me) {
     int x = me.getX();
     int y = me.getY();
@@ -49,6 +60,13 @@ public class ClickToNN {
     throw new IllegalArgumentException();
   }
 
+  /**
+   * Converts the pitch and the octave to the proper NoteName for white keys.
+   *
+   * @param pitch the pitch of the NoteName
+   * @param oct the octave of the NoteName
+   * @return the proper NoteName
+   */
   private NoteName getWhiteKey(int pitch, int oct) {
     switch (pitch) {
       case 0:

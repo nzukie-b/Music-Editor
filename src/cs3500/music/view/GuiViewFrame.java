@@ -1,15 +1,17 @@
 package cs3500.music.view;
 
 
-import java.awt.*;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.KeyListener;
 
 import java.awt.event.MouseListener;
 import java.util.TreeMap;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
-import javax.swing.*;
 
 /**
  * A skeleton Frame (i.e., a window) in Swing, used to draw the music on a "staff"
@@ -42,7 +44,6 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
     this.scrollPane = new JScrollPane(shtPanel,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    System.out.println(scrollPane.getHorizontalScrollBar().getBlockIncrement());
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.getContentPane().add(scrollPane);
@@ -54,7 +55,6 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
     this.setVisible(true);
     this.setFocusable(true);
     this.setResizable(false);
-    //this.pack();
   }
 
   @Override
@@ -62,8 +62,9 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
     shtPanel.updateSheet(modelData);
     pianoPanel.updateSheet(modelData);
     scrollPane.getHorizontalScrollBar().setMaximum(modelData.getMaxBeat() * 40 + 82);
-    if (shtPanel.getBeat() == modelData.getMaxBeat())
+    if (shtPanel.getBeat() == modelData.getMaxBeat()) {
       scrollPane.getHorizontalScrollBar().setValue(shtPanel.getBeat() * 40);
+    }
   }
 
   @Override
@@ -107,6 +108,6 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
 
   @Override
   public void scrollWithMusic() {
-
+    //throw new IllegalArgumentException();
   }
 }
