@@ -1,4 +1,4 @@
-package cs3500.music.view;
+package cs3500.music.provider.view;
 
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -96,8 +96,8 @@ public class CompositeView extends JFrame implements GUIViewOperations {
 
   @Override
   public void initialize() {
-    gui.initialize();
-    midi.initialize();
+    //gui.initialize();
+    //midi.initialize();
   }
 
   @Override
@@ -151,5 +151,20 @@ public class CompositeView extends JFrame implements GUIViewOperations {
   public int getScoreHeight() {
 
     return gui.getScoreHeight();
+  }
+
+  @Override
+  public int getWhiteWidth() {
+    return gui.getWhiteWidth();
+  }
+
+  @Override
+  public int getBlackWidth() {
+    return gui.getBlackWidth();
+  }
+
+  @Override
+  public int getBlackWhiteOffset() {
+    return gui.getBlackWhiteOffset();
   }
 }

@@ -1,13 +1,13 @@
-package cs3500.music.controller;
+package cs3500.music.provider.controller;
 
+import cs3500.music.provider.model.MusicEditorOperations;
+import cs3500.music.provider.view.View;
+import cs3500.music.provider.view.ViewModel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import cs3500.music.model.MusicEditorOperations;
-import cs3500.music.view.View;
-import cs3500.music.view.ViewModel;
 
 /**
  * A general controller with basic functionality needed for any view.

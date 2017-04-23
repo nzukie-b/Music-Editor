@@ -4,6 +4,7 @@ import cs3500.music.model.Note;
 import cs3500.music.model.NoteName;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
+import java.util.HashSet;
 import java.util.Set;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiEvent;
@@ -24,6 +25,7 @@ public class MidiViewImpl implements IMusicView {
   private int currBeat;
   private boolean paused;
   private ModelData data;
+  private boolean first;
 
   /**
    * Constructor for the MidiViewImpl.
@@ -31,6 +33,7 @@ public class MidiViewImpl implements IMusicView {
   public MidiViewImpl() {
     this.currBeat = 0;
     this.paused = false;
+    this.first = true;
     try {
       this.seq = MidiSystem.getSequencer();
       Sequence seqnce = null;
@@ -49,41 +52,46 @@ public class MidiViewImpl implements IMusicView {
 
   @Override
   public void updateView(ModelData data) {
-    this.data = data;
-    NoteName[] a = data.getSheetData().keySet()
-        .toArray(new NoteName[data.getSheetData().keySet().size()]);
-    if (!paused) {
-      int tempo = 60000000 / data.getTempo();
-      seq.setTempoInBPM(tempo);
-      for (int i = currBeat; i < data.getMaxBeat(); i++) {
-        for (NoteName nn : a) {
-          Set<Note> notes = data.getSheetData().get(nn);
-          for (Note n : notes) {
-            if (n.isPlaying(i)) {
-              try {
-                int instr = n.getInstrument() - 1;
-                int pitch = nn.getValue();
-                int dyn = n.getDynamics();
-                MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, instr, pitch, dyn);
-                MidiMessage end = new ShortMessage(ShortMessage.NOTE_OFF, instr, pitch, dyn);
-                track.add(new MidiEvent(start, 10 * n.getStart()));
-                track.add(new MidiEvent(end, 10 * (n.getStart() + n.getDuration())));
-              }
-              catch (InvalidMidiDataException e) {
-                e.printStackTrace();
+    if (first) {
+      this.data = data;
+      NoteName[] a = data.getSheetData().keySet()
+          .toArray(new NoteName[data.getSheetData().keySet().size()]);
+      if (!paused) {
+        int tempo = 60000000 / data.getTempo();
+        seq.setTempoInBPM(tempo);
+        for (int i = currBeat; i < data.getMaxBeat(); i++) {
+          for (NoteName nn : a) {
+            Set<Note> notes = data.getSheetData().get(nn);
+            for (Note n : notes) {
+              if (n.isPlaying(i)) {
+                try {
+                  int instr = n.getInstrument() - 1;
+                  int pitch = nn.getValue();
+                  int dyn = n.getDynamics();
+                  MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, instr, pitch, dyn);
+                  MidiMessage end = new ShortMessage(ShortMessage.NOTE_OFF, instr, pitch, dyn);
+                  track.add(new MidiEvent(start, 10 * n.getStart()));
+                  track.add(new MidiEvent(end, 10 * (n.getStart() + n.getDuration())));
+                } catch (InvalidMidiDataException e) {
+                  e.printStackTrace();
+                }
               }
             }
           }
+          currBeat = 0;
+          this.seq.setTickPosition(currBeat);
         }
-        currBeat = (int) track.get(currBeat * 1000).getTick() / 1000;
       }
+      first = !first;
+      this.seq.start();
     }
-    this.seq.start();
   }
 
   @Override
   public void setBeat(int beat) {
-    track.get(currBeat * 1000).setTick(beat * 1000);
+    seq.setTickPosition(seq.getTickPosition() + (long) (beat * 10 - currBeat));
+    this.currBeat = beat * 10;
+    seq.setTempoInMPQ(data.getTempo());
   }
 
   @Override
@@ -98,17 +106,18 @@ public class MidiViewImpl implements IMusicView {
 
   @Override
   public int getBeat() {
-    return currBeat;
+    return currBeat / 10;
   }
 
   @Override
   public void toggleMusic() {
+
     paused = !paused;
     if (paused) {
       this.seq.stop();
-    }
-    else {
-      track.get(currBeat * 1000).setTick(currBeat * 1000);
+      long val = seq.getTickPosition();
+      this.currBeat = Math.toIntExact(val);
+    } else {
       this.seq.start();
       int tempo = 60000000 / data.getTempo();
       seq.setTempoInBPM(tempo);
@@ -116,8 +125,57 @@ public class MidiViewImpl implements IMusicView {
   }
 
   @Override
+  public int getMargin() {
+    return 0;
+  }
+
+  @Override
+  public int getWhiteLength() {
+    return 0;
+  }
+
+  @Override
+  public int getBlackLength() {
+    return 0;
+  }
+
+  @Override
+  public int getScoreHeight() {
+    return 0;
+  }
+
+  @Override
+  public int getBlackWidth() {
+    return 0;
+  }
+
+  @Override
+  public int getWhiteWidth() {
+    return 0;
+  }
+
+  @Override
+  public int getOffset() {
+    return 0;
+  }
+
+  @Override
   public void scrollWithMusic() {
     //throw new IllegalArgumentException();
   }
 
+  @Override
+  public void togglePractice() {
+    //
+  }
+
+  @Override
+  public boolean getPractice() {
+    return false;
+  }
+
+  @Override
+  public Set<NoteName> getCurrentNotes() {
+    return new HashSet<>();
+  }
 }

@@ -1,5 +1,6 @@
-package cs3500.music.view;
+package cs3500.music.provider.view;
 
+import cs3500.music.provider.model.Note;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.io.IOException;
@@ -8,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import cs3500.music.model.Note;
 
 /**
  * The console view of a music piece.  It displays the notes of a music piece vertically.

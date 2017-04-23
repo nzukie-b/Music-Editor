@@ -1,10 +1,10 @@
-package cs3500.music.view;
+package cs3500.music.provider.view;
 
+import cs3500.music.provider.model.MusicEditorOperations;
+import cs3500.music.provider.model.Note;
 import java.util.List;
 import java.util.Map;
 
-import cs3500.music.model.MusicEditorOperations;
-import cs3500.music.model.Note;
 
 /**
  * A read-only viewmodel that is used as a source of data for a view.

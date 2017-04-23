@@ -1,4 +1,4 @@
-package cs3500.music.view;
+package cs3500.music.provider.view;
 
 import javax.swing.JPanel;
 
@@ -61,5 +61,23 @@ public interface GUIViewOperations extends View {
    * @return The height of the score area.
    */
   int getScoreHeight();
+
+  /**
+   * Gets the width of a white piano key.
+   * @return The width of the white key.
+   */
+  int getWhiteWidth();
+
+  /**
+   * Gets the width of a black piano key.
+   * @return The width of the black key.
+   */
+  int getBlackWidth();
+
+  /**
+   * Gets the space between the first white key and the first black key.
+   * @return The space between the white and black key.
+   */
+  int getBlackWhiteOffset();
 
 }

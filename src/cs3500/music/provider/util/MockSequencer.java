@@ -1,4 +1,4 @@
-package cs3500.music.util;
+package cs3500.music.provider.util;
 
 import javax.sound.midi.ControllerEventListener;
 import javax.sound.midi.InvalidMidiDataException;

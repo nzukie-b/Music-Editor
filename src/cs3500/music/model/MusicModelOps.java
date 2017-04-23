@@ -106,4 +106,7 @@ public interface MusicModelOps {
    */
   int getTempo();
 
+  void addRepeat(Repeat rep, int measure);
+
+  Map<Repeat, Set<Integer>> getRepeat();
 }

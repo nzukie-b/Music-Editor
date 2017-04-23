@@ -1,12 +1,15 @@
 package cs3500.music.view;
 
 
+import cs3500.music.model.NoteName;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyListener;
 
 import java.awt.event.MouseListener;
+import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -30,8 +33,8 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
    */
   public GuiViewFrame() {
     super();
-    this.setTitle("MusicEditor");
-    this.setSize(new Dimension(1802, 800));
+    this.setTitle("MusicEditor2");
+    this.setSize(new Dimension(1802, 850));
     this.paused = false;
 
     ModelData data = new ModelData("", new TreeMap<>(), 4, 0, 60);
@@ -107,7 +110,58 @@ public class GuiViewFrame extends javax.swing.JFrame implements IMusicView {
   }
 
   @Override
+  public int getMargin() {
+    return pianoPanel.getMargin();
+  }
+
+  @Override
+  public int getWhiteLength() {
+    return pianoPanel.getWhiteKeyHeight();
+  }
+
+  @Override
+  public int getBlackLength() {
+    return pianoPanel.getBlackKeyHeight();
+  }
+
+  @Override
+  public int getScoreHeight() {
+    return 0;
+  }
+
+  @Override
+  public int getBlackWidth() {
+    return pianoPanel.getBlackKeyWidth();
+  }
+
+  @Override
+  public int getWhiteWidth() {
+    return pianoPanel.getWhiteKeyWidth();
+  }
+
+  @Override
+  public int getOffset() {
+    return pianoPanel.getOffset();
+  }
+
+  @Override
   public void scrollWithMusic() {
     //throw new IllegalArgumentException();
+  }
+
+  @Override
+  public void togglePractice() {
+    pianoPanel.togglePractice();
+    repaint();
+  }
+
+  @Override
+  public boolean getPractice() {
+    return pianoPanel.getPractice();
+  }
+
+  @Override
+  public Set<NoteName> getCurrentNotes() {
+    return pianoPanel.getCurrentNotes();
   }
 }

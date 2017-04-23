@@ -1,6 +1,7 @@
-package cs3500.music.model;
+package cs3500.music.provider.model;
 
 import java.util.Objects;
+
 
 /**
  * A representation of a note in a piece of music.  A note has a tone, an octave, a position,

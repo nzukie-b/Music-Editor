@@ -1,4 +1,4 @@
-package cs3500.music.model;
+package cs3500.music.provider.model;
 
 /**
  * Tones in music theory.  There are 12 of them. Each of them has a value to represent it.

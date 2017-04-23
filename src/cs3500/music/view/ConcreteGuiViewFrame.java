@@ -1,9 +1,14 @@
 package cs3500.music.view;
 
+import cs3500.music.model.NoteName;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.swing.JFrame;
 
 /**
@@ -71,7 +76,57 @@ public class ConcreteGuiViewFrame extends JFrame implements IMusicView {
   }
 
   @Override
+  public int getMargin() {
+    return 0;
+  }
+
+  @Override
+  public int getWhiteLength() {
+    return 0;
+  }
+
+  @Override
+  public int getBlackLength() {
+    return 0;
+  }
+
+  @Override
+  public int getScoreHeight() {
+    return 0;
+  }
+
+  @Override
+  public int getBlackWidth() {
+    return 0;
+  }
+
+  @Override
+  public int getOffset() {
+    return 0;
+  }
+
+  @Override
+  public int getWhiteWidth() {
+    return 0;
+  }
+
+  @Override
   public void scrollWithMusic() {
     //throw new IllegalArgumentException();
+  }
+
+  @Override
+  public void togglePractice() {
+    //no practice in concrete
+  }
+
+  @Override
+  public boolean getPractice() {
+    return false;
+  }
+
+  @Override
+  public Set<NoteName> getCurrentNotes() {
+    return new HashSet<>();
   }
 }

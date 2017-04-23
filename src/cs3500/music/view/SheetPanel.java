@@ -2,11 +2,13 @@ package cs3500.music.view;
 
 import cs3500.music.model.Note;
 import cs3500.music.model.NoteName;
+import cs3500.music.model.Repeat;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.Map;
 import java.util.Set;
 import javax.swing.JPanel;
 
@@ -79,9 +81,8 @@ public class SheetPanel extends JPanel {
     int lastBeat = data.getMaxBeat();
     int pitches = data.getSheetData().size();
     int measure = data.getMeasureLength();
-    while (lastBeat % measure != 0) {
-      lastBeat++;
-    }
+    Map<Repeat, Set<Integer>> repeats = data.getRepeats();
+
     int noteHeight = 15;
     int noteWidth = 40;
     int widthBuffer = noteWidth * 2;
@@ -136,8 +137,34 @@ public class SheetPanel extends JPanel {
       g.drawString(Integer.toString(i), i * noteWidth + widthBuffer, widthBuffer / 3);
     }
 
+    try {
+      Set<Integer> starts = repeats.get(Repeat.START);
+      Set<Integer> ends = repeats.get(Repeat.END);
+      for (Integer i : starts) {
+        g.setStroke(new BasicStroke(5));
+        g.drawLine(i * noteWidth + widthBuffer, heightBuffer, i * noteWidth + widthBuffer,
+            panelHeight);
+        g.fillOval(i * noteWidth + widthBuffer + 10,
+            panelHeight / 2 - panelHeight / 6, 10, 10);
+        g.fillOval(i * noteWidth + widthBuffer + 10,
+            panelHeight / 2 + panelHeight / 6, 10, 10);
+      }
+
+      for (Integer i : ends) {
+        g.drawLine(i * noteWidth + widthBuffer, heightBuffer,
+            i * noteWidth + widthBuffer, panelHeight);
+        g.fillOval(i * noteWidth + widthBuffer - 20,
+            panelHeight / 2 - panelHeight / 6, 10, 10);
+        g.fillOval(i * noteWidth + widthBuffer - 20,
+            panelHeight / 2 + panelHeight / 6, 10, 10);
+      }
+    } catch (NullPointerException e) {
+      //Nothing.
+    }
+
     //draws the red line showing the current beat
     g.setColor(Color.red);
+    g.setStroke(new BasicStroke(3));
     g.drawLine(redLineBeat * noteWidth + widthBuffer, heightBuffer,
         redLineBeat * noteWidth + widthBuffer, panelHeight);
 

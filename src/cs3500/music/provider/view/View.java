@@ -1,4 +1,4 @@
-package cs3500.music.view;
+package cs3500.music.provider.view;
 
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;

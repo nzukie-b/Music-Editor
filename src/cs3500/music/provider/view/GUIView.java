@@ -1,5 +1,8 @@
-package cs3500.music.view;
+package cs3500.music.provider.view;
 
+
+import cs3500.music.provider.model.Note;
+import cs3500.music.provider.model.Tone;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,8 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.Timer;
 
-import cs3500.music.model.Note;
-import cs3500.music.model.Tone;
 
 /**
  * A gui view that is able display music of a given piece.
@@ -145,6 +146,21 @@ public class GUIView extends JFrame implements GUIViewOperations {
   @Override
   public int getScoreHeight() {
     return scrollPane.getHeight();
+  }
+
+  @Override
+  public int getWhiteWidth() {
+    return PIANO_SIZE;
+  }
+
+  @Override
+  public int getBlackWidth() {
+    return PIANO_SIZE / 2;
+  }
+
+  @Override
+  public int getBlackWhiteOffset() {
+    return PIANO_SIZE - PIANO_SIZE / 4;
   }
 
   @Override

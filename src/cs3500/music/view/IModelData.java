@@ -2,6 +2,7 @@ package cs3500.music.view;
 
 import cs3500.music.model.Note;
 import cs3500.music.model.NoteName;
+import cs3500.music.model.Repeat;
 import java.util.Map;
 import java.util.Set;
 
@@ -52,4 +53,6 @@ public interface IModelData {
    * @return A set of the all the notes being played at the current beat.
    */
   Set<NoteName> getNotesAtBeat(int beat);
+
+  Map<Repeat, Set<Integer>> getRepeats();
 }

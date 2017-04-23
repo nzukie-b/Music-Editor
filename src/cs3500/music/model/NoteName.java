@@ -1,6 +1,8 @@
 package cs3500.music.model;
 
 
+import java.util.Objects;
+
 /**
  * Is the actual name for each note. Has a pitch and an octave.
  * Pitch an be A, A#, B, C, C#, D, D#, E, F, F#, G, G#. Octave can be
@@ -131,5 +133,22 @@ public class NoteName implements NoteNameOps {
     s = String.format("%" + padStart + "s", s);
     s = String.format("%-" + 5 + "s", s);
     return s;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof NoteName)) {
+      return false;
+    }
+    else {
+      NoteName n = (NoteName) o;
+      NoteNameComp nc = new NoteNameComp();
+      return nc.compare(this, n) == 0;
+    }
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.getValue());
   }
 }

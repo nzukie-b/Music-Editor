@@ -2,6 +2,8 @@ package cs3500.music.view;
 
 import cs3500.music.model.Note;
 import cs3500.music.model.NoteName;
+import cs3500.music.model.Repeat;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +17,7 @@ public class ModelData implements IModelData {
   private final int measureLength;
   private final int maxBeat;
   private final int tempo;
+  private final Map<Repeat, Set<Integer>> repeats;
 
   /**
    * Constructor for MusicData.
@@ -32,6 +35,26 @@ public class ModelData implements IModelData {
     this.measureLength = measureLength;
     this.maxBeat = maxBeat;
     this.tempo = tempo;
+    this.repeats = new HashMap<>();
+  }
+
+  /**
+   * Constructor for MusicData.
+   *
+   * @param str The model's data as a string.
+   * @param sht The model's data as a map.
+   * @param measureLength The length of one measure.
+   * @param maxBeat The max beat in this sheet.
+   * @param tempo The tempo in bpm.
+   */
+  public ModelData(String str, Map<NoteName, Set<Note>> sht, int measureLength,
+      int maxBeat, int tempo, Map<Repeat, Set<Integer>> rep) {
+    this.sheetAsString = str;
+    this.sheetData = sht;
+    this.measureLength = measureLength;
+    this.maxBeat = maxBeat;
+    this.tempo = tempo;
+    this.repeats = rep;
   }
 
   @Override
@@ -72,5 +95,10 @@ public class ModelData implements IModelData {
       }
     }
     return noteSet;
+  }
+
+  @Override
+  public Map<Repeat, Set<Integer>> getRepeats() {
+    return repeats;
   }
 }

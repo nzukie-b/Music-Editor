@@ -1,12 +1,12 @@
-package cs3500.music.model;
+package cs3500.music.provider.model;
 
+import cs3500.music.provider.util.CompositionBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import cs3500.music.util.CompositionBuilder;
 
 /**
  * The MusicEditorModel, an implementation of the MusicEditorOperations interface parameterized
@@ -178,7 +178,8 @@ public class MusicEditorModel implements MusicEditorOperations<Note> {
     if (notes.size() == 0) {
       lowest = new Note(Tone.C, 3);
       highest = new Note(Tone.C, 4);
-    } else {
+    }
+    else {
       Note templ = notes.get(0);
       Note temph = notes.get(0);
       for (Note n : notes) {
@@ -193,7 +194,6 @@ public class MusicEditorModel implements MusicEditorOperations<Note> {
       highest = new Note(temph.getTone(), temph.getOctave());
     }
   }
-
 
   @Override
   public int getLength() {

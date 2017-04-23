@@ -1,22 +1,22 @@
-package cs3500.music;
+package cs3500.music.provider;
 
-import cs3500.music.controller.GUIController;
-import cs3500.music.controller.GeneralController;
-import cs3500.music.model.MusicEditorModel;
-import cs3500.music.model.MusicEditorOperations;
-import cs3500.music.util.CompositionBuilder;
-import cs3500.music.util.MusicReader;
-import cs3500.music.view.GUIViewOperations;
-import cs3500.music.view.View;
-import cs3500.music.view.ViewFactory;
+import cs3500.music.provider.controller.GUIController;
+import cs3500.music.provider.controller.GeneralController;
+import cs3500.music.provider.model.MusicEditorModel;
+import cs3500.music.provider.model.MusicEditorOperations;
+import cs3500.music.provider.util.CompositionBuilder;
+import cs3500.music.provider.util.MusicReader;
+import cs3500.music.provider.view.GUIViewOperations;
+import cs3500.music.provider.view.View;
 
+import cs3500.music.provider.view.ViewFactory;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 import javax.sound.midi.InvalidMidiDataException;
 
 
-public class MusicEditor {
+public class MusicEditor2 {
   /**
    * The main method of the music editor.  Takes in a file to read and a type of view to use
    * and executes the music editor.

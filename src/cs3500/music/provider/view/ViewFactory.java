@@ -1,4 +1,4 @@
-package cs3500.music.view;
+package cs3500.music.provider.view;
 
 /**
  * A factory of music views.

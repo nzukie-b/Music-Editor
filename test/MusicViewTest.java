@@ -1,7 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import cs3500.music.controller.ClickToNN;
 import cs3500.music.controller.MusicController;
 import cs3500.music.model.MusicModel;
 import cs3500.music.model.MusicModelOps;
@@ -85,7 +84,7 @@ public class MusicViewTest {
       1, 1, 1, 240, 150, 1, 1, 1,
       true, 1);
 
-  ClickToNN ctnn = new ClickToNN();
+  //ClickToNN ctnn = new ClickToNN();
 
   /**
    *  Add some note into music model mm for the further tests.
@@ -108,6 +107,7 @@ public class MusicViewTest {
 
 
 
+  /*
   @Test
   public void testME1() {
     assertEquals(nnc.compare(ctnn.getNN(meWhite), c0), 0);
@@ -127,6 +127,7 @@ public class MusicViewTest {
   public void testME4() {
     assertEquals(nnc.compare(ctnn.getNN(meMiddle), d5), 0);
   }
+  */
 
   @Test
   public void testKE1() {

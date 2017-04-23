@@ -1,17 +1,16 @@
-package cs3500.music.controller;
+package cs3500.music.provider.controller;
 
 
+import cs3500.music.provider.model.MusicEditorOperations;
+import cs3500.music.provider.model.Note;
+import cs3500.music.provider.model.Tone;
+import cs3500.music.provider.view.GUIViewOperations;
+import cs3500.music.provider.view.ViewModel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
-
-import cs3500.music.model.MusicEditorOperations;
-import cs3500.music.model.Note;
-import cs3500.music.model.Tone;
-import cs3500.music.view.GUIViewOperations;
-import cs3500.music.view.ViewModel;
 
 /**
  * The controller of the music editor that is currently responsible for handling user input.

@@ -1,5 +1,6 @@
-package cs3500.music.view;
+package cs3500.music.provider.view;
 
+import cs3500.music.provider.model.Note;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -13,7 +14,6 @@ import javax.sound.midi.Sequencer;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
-import cs3500.music.model.Note;
 
 /**
  * A midi view that is able play music of a given piece.

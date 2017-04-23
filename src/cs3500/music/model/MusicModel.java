@@ -2,6 +2,8 @@ package cs3500.music.model;
 
 import cs3500.music.util.CompositionBuilder;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -14,6 +16,7 @@ import java.util.TreeSet;
  */
 public class MusicModel implements MusicModelOps {
   private Map<NoteName, Set<Note>> sheet;
+  private Map<Repeat, Set<Integer>> repeat;
   private int tsNum;
   private int tsDen;
   //bpm added to support tempo functionality.
@@ -33,6 +36,9 @@ public class MusicModel implements MusicModelOps {
     this.tsNum = timeSigNum;
     this.tsDen = timeSigDen;
     this.bpm = 60;
+    this.repeat = new HashMap<>();
+    repeat.put(Repeat.START, new TreeSet<>());
+    repeat.put(Repeat.END, new TreeSet<>());
   }
 
   @Override
@@ -48,6 +54,13 @@ public class MusicModel implements MusicModelOps {
       sheet.put(name, noteList);
       normalize();
     }
+  }
+
+  @Override
+  public void addRepeat (Repeat rep, int measure) {
+    Set<Integer> intSet = new HashSet<>();
+    intSet.add(measure);
+    repeat.put(rep, intSet);
   }
 
   @Override
@@ -229,6 +242,12 @@ public class MusicModel implements MusicModelOps {
   public int getTempo() {
     return bpm;
   }
+
+
+  public Map<Repeat, Set<Integer>> getRepeat() {
+    return repeat;
+  }
+
 
   /**
    * Normalizes the tree so that if there are any gaps between notes being printed,

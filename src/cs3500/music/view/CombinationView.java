@@ -1,7 +1,10 @@
 package cs3500.music.view;
 
+import cs3500.music.model.NoteName;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Class that shows the gui while playing midi.
@@ -35,11 +38,9 @@ public class CombinationView implements IMusicView {
 
   @Override
   public void setBeat(int beat) {
-    if (paused) {
-      currBeat = beat;
-      gui.setBeat(beat);
-      midi.setBeat(gui.getBeat());
-    }
+    gui.setBeat(beat);
+    midi.setBeat(beat);
+    currBeat = gui.getBeat();
   }
 
   @Override
@@ -54,7 +55,7 @@ public class CombinationView implements IMusicView {
 
   @Override
   public int getBeat() {
-    return currBeat;
+    return gui.getBeat();
   }
 
   @Override
@@ -65,10 +66,60 @@ public class CombinationView implements IMusicView {
   }
 
   @Override
+  public int getMargin() {
+    return gui.getMargin();
+  }
+
+  @Override
+  public int getWhiteLength() {
+    return gui.getWhiteLength();
+  }
+
+  @Override
+  public int getBlackLength() {
+    return gui.getBlackLength();
+  }
+
+  @Override
+  public int getScoreHeight() {
+    return 0;
+  }
+
+  @Override
+  public int getBlackWidth() {
+    return gui.getBlackWidth();
+  }
+
+  @Override
+  public int getWhiteWidth() {
+    return gui.getWhiteWidth();
+  }
+
+  @Override
+  public int getOffset() {
+    return gui.getOffset();
+  }
+
+  @Override
   public void scrollWithMusic() {
     if (!paused) {
       gui.setBeat(gui.getBeat() + 1);
-      currBeat++;
+      currBeat = gui.getBeat();
     }
+  }
+
+  @Override
+  public void togglePractice() {
+    gui.togglePractice();
+  }
+
+  @Override
+  public boolean getPractice() {
+    return gui.getPractice();
+  }
+
+  @Override
+  public Set<NoteName> getCurrentNotes() {
+    return gui.getCurrentNotes();
   }
 }

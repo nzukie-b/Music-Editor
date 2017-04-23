@@ -1,11 +1,11 @@
-package cs3500.music.model;
+package cs3500.music.provider.model;
 
 import java.util.List;
 import java.util.Map;
 
 /**
  * The interface that defines the operations necessary to run as a Music Editor Model
- * parameterized over the type T.  A MusicEditor should have the cabability to add and remove a T,
+ * parameterized over the type T.  A MusicEditor2 should have the cabability to add and remove a T,
  * combine two pieces to play
  * simultaneously or consecutively, and be able to show the piece as it will be played.
  *

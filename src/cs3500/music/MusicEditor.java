@@ -28,7 +28,7 @@ public class MusicEditor {
     MusicModel.Builder mmbuild = new MusicModel.Builder(model);
 
     ViewFactory vf = new ViewFactory();
-    IMusicView view = vf.create(args[0]);
+    IMusicView view = vf.create(args[0], args[2]);
 
     try {
       BufferedReader br = new BufferedReader(new FileReader(args[1]));
